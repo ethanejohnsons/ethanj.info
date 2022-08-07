@@ -1,0 +1,31 @@
+img {
+    width: 5rem;
+    height: 5rem;
+}
+
+div {
+    display: flex;
+    width: 20rem;
+    height: 5rem;
+    margin: auto;
+}
+
+html {
+    padding: 50px 0;
+    background-color: #fdfff5;
+}
+
+hr {
+    width: 20rem;
+    height: 1px;
+    border: none;
+    background-color: #222222;
+}
+
+.profile {
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+    margin: auto;
+    border-radius: 50%;
+}
