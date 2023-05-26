@@ -12,7 +12,7 @@ body {
 }
 
 ::selection {
-    background: #5f2ead; /* WebKit/Blink Browsers */
+    background: #5f2ead;
 }
 
 h1 {
