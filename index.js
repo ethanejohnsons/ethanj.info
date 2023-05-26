@@ -1,3 +1,3 @@
 import {setupAndBeginRender} from "./render/voyager";
 
-setupAndBeginRender();
+setupAndBeginRender(window.innerWidth, 2000, -400, 250, 2);

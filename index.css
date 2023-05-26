@@ -1,31 +1,56 @@
-img {
-    width: 5rem;
-    height: 5rem;
-}
-
-div {
-    display: flex;
-    width: 20rem;
-    height: 5rem;
-    margin: auto;
-}
-
 html {
-    padding: 50px 0;
-    background-color: #fdfff5;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+}
+
+body {
+    font-size: 4rem;
+    font-family: 'JetBrains Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
 }
 
 hr {
-    width: 20rem;
-    height: 1px;
-    border: none;
-    background-color: #222222;
+    border: 2px solid white;
 }
 
-.profile {
+h1 {
+    font-size: 5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+#about {
+    justify-content: center;
+    background-color: #fdfff5;
     display: flex;
-    width: 10rem;
-    height: 10rem;
-    margin: auto;
-    border-radius: 50%;
+    height: 1000px;
+}
+
+#experience {
+
+}
+
+#lazurite {
+    background: linear-gradient(135deg, rgba(71,150,255,1) 0%, rgba(156,198,255,1) 100%);
+    display: flex;
+    height: 2000px;
+}
+
+.project {
+    width: 100px;
+    height: 100px;
+}
+
+.cursor {
+    animation: blinker 1s steps(1, end) infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
 }
