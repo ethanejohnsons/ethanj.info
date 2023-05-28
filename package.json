@@ -2,7 +2,6 @@
   "dependencies": {
     "nodejs": "^0.0.0",
     "three": "^0.152.2",
-    "vite": "^4.3.8",
-    "webgl": "^0.0.7"
+    "vite": "^4.3.8"
   }
 }

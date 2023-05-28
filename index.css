@@ -1,9 +1,12 @@
 html {
     background-color: #fdfff5;
     overflow-x: hidden;
+    max-width: 100%;
 }
 
 body {
+    position: relative;
+    max-width: 100%;
     font-size: 4rem;
     font-family: 'JetBrains Mono', monospace;
     -webkit-font-smoothing: antialiased;
@@ -27,23 +30,71 @@ hr {
     border: 2px solid white;
 }
 
+iframe {
+    width: 94%;
+    height: max(150px, 20vw);
+    border: 4px solid #FFFFFF
+}
+
 #about {
-    justify-content: center;
     margin-top: 4rem;
+    margin-bottom: 4rem;
     background-color: #fdfff5;
-    height: 800px;
     font-size: 1.2rem;
+}
+
+#about-intro {
+    display: flex;
+    white-space: nowrap;
+    justify-content: center;
+    margin-left: 3.5vw;
+    font-size: max(3.5vw, 2.5rem);
+    height: max(110px, 9vw);
+}
+
+#about-experience {
+    margin-top: 75px;
+}
+
+#about-tech {
+    margin-top: 25px;
+}
+
+#about-contact {
+    margin-top: 50px;
 }
 
 #lazurite {
     background: linear-gradient(135deg, rgba(71,150,255,1) 0%, rgba(156,198,255,1) 100%);
     display: flex;
-    height: 2200px;
 }
 
-.project {
+#lazurite-info {
+    position: absolute;
+    width: min(94vw, 700px);
+    z-index: 1;
+    margin: min(4vw, 6rem) min(3vw, 5rem) min(3vw, 5rem);
+    background-color: #00000044;
+    color: #FFFFFF;
+    border-radius: 10px
+}
+
+.mod {
+    width: 94%;
+}
+
+.mod-title {
+    display: flex;
+    gap: 10px;
+}
+
+.mod-icon {
     width: 100px;
     height: 100px;
+}
+
+.mod-description {
+    margin-left: 20px;
 }
 
 .cursor {

@@ -9,39 +9,80 @@ import {ShaderPass} from "three/addons/postprocessing/ShaderPass";
 import {GammaCorrectionShader} from "three/addons/shaders/GammaCorrectionShader";
 import {RGBAFormat, sRGBEncoding} from "three";
 
-export function setupAndBeginRender(sizeX, sizeY, offsetX, offsetY, offsetZ) {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(100, sizeX / sizeY, 0.1, 1000);
-    camera.setViewOffset(sizeX, sizeY, offsetX, offsetY, sizeX, sizeY);
+export function setupAndBeginRender(domElement, height, offsetX, offsetY, offsetZ, heightMobile, offsetXMobile, offsetYMobile, offsetZMobile) {
+    const width = window.innerWidth;
 
+    // Set up scene
+    const scene = new THREE.Scene();
+
+    // Set up camera
+    const camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
+
+    // Set up renderer
     const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(sizeX, sizeY);
+
+    // Set up orbit controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 0, 0);
+    controls.maxPolarAngle = Math.PI / 4 + Math.PI / 2;
+    controls.minPolarAngle = -Math.PI / 4 + Math.PI / 2;
+    controls.rotateSpeed = 0.35;
+    controls.enablePan = false;
+    controls.enableZoom = false;
+
+    // Set up resize callback
+    window.onresize = () => {
+        const width = window.innerWidth;
+
+        if (width < 1400) {
+            camera.setViewOffset(width, heightMobile, offsetXMobile, offsetYMobile, width, heightMobile);
+            renderer.setSize(width, heightMobile);
+            camera.aspect = width / heightMobile;
+            camera.position.x = width < 700 ? offsetZ + 2 : offsetZ + 1;
+            camera.rotation.y = Math.PI / 2;
+        } else {
+            camera.setViewOffset(width, height, offsetX, offsetY, width, height);
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.position.x = offsetZ;
+            camera.rotation.y = Math.PI / 2;
+        }
+
+        controls.update();
+        camera.updateProjectionMatrix();
+    }
+
+    window.onresize();
 
     let target;
     if (WebGL.isWebGL2Available()) {
-        target = new THREE.WebGLRenderTarget(sizeX * 2, sizeY * 2, {
+        target = new THREE.WebGLRenderTarget(width * 2, height * 2, {
             format: RGBAFormat,
             encoding: sRGBEncoding
         });
         target.samples = 8;
     }
+
+    // Set up composer
     const composer = new EffectComposer(renderer, target);
 
+    // Set up initial render pass
     const renderPass = new RenderPass(scene, camera);
     composer.addPass(renderPass);
 
+    // Set up gama correction pass
     const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);
     composer.addPass(gammaCorrectionPass);
 
+    // Set up sky lighting
     const skyLight = new THREE.HemisphereLight(0xFFFFFF, 0x222222, 1);
     scene.add(skyLight);
 
+    // Set up ambient lighting
     const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.25);
     scene.add(ambientLight);
 
-    const maxCloudDistance = 128;
-    const clouds = [];
-    
+    // Load the voyager model
     const loader = new GLTFLoader();
     const clock = new THREE.Clock();
     var voyager;
@@ -55,7 +96,8 @@ export function setupAndBeginRender(sizeX, sizeY, offsetX, offsetY, offsetZ) {
         voyager.scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / -1.8);
         voyager.scene.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI / -8);
 
-        const outlinePass = new OutlinePass(new THREE.Vector2(sizeX, sizeY), scene, camera, [ voyager.scene ]);
+        // Set up outline pass for voyager
+        const outlinePass = new OutlinePass(new THREE.Vector2(width, height), scene, camera, [ voyager.scene ]);
         outlinePass.edgeThickness = 2.5;
         outlinePass.edgeStrength = 20.0;
         composer.addPass(outlinePass);
@@ -63,8 +105,12 @@ export function setupAndBeginRender(sizeX, sizeY, offsetX, offsetY, offsetZ) {
         console.error(error);
     });
 
+    // Set up clouds
+    const maxCloudDistance = 128;
+    const cubeSize = 3;
+    const clouds = [];
+
     const createCloud = (initial) => {
-        const cubeSize = 3;
         const width = Math.ceil(Math.random() * 5 + 5);
         const height = 2;
         const length = Math.ceil(Math.random() * 5 + 5);
@@ -109,41 +155,33 @@ export function setupAndBeginRender(sizeX, sizeY, offsetX, offsetY, offsetZ) {
         scene.add(cloud);
     }
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 0, 0);
-    controls.maxPolarAngle = Math.PI / 4 + Math.PI / 2;
-    controls.minPolarAngle = -Math.PI / 4 + Math.PI / 2;
-    controls.rotateSpeed = 0.15;
-    controls.enablePan = false;
-    controls.enableZoom = false;
-
-    camera.position.x = offsetZ;
-    camera.rotation.y = Math.PI / 2;
-
+    // Set up animation loop
     const animate = () => {
         requestAnimationFrame(animate);
         if (voyager && mixer) {
             mixer.update(clock.getDelta() * 0.15);
             mixer.clipAction(voyager.animations[0]).play();
-
-            for (let i = 0; i < clouds.length; i++) {
-                let cloud = clouds[i];
-                cloud.position.x -= 0.05;
-                cloud.position.z -= 0.005;
-
-                // out of bounds
-                if (cloud.position.x < -maxCloudDistance) {
-                    let index = clouds.indexOf(cloud);
-                    scene.remove(cloud);
-                    delete clouds[index];
-                    clouds[index] = createCloud(false);
-                    scene.add(clouds[index]);
-                }
-            }
-            composer.render();
         }
+
+        for (let i = 0; i < clouds.length; i++) {
+            let cloud = clouds[i];
+            cloud.position.x -= 0.05;
+            cloud.position.z -= 0.005;
+
+            // out of bounds
+            if (cloud.position.x < -maxCloudDistance) {
+                let index = clouds.indexOf(cloud);
+                scene.remove(cloud);
+                delete clouds[index];
+                clouds[index] = createCloud(false);
+                scene.add(clouds[index]);
+            }
+        }
+
+        composer.render();
     }
 
+    // Run the animation loop
     if (WebGL.isWebGLAvailable()) {
         animate();
     } else {
@@ -151,5 +189,5 @@ export function setupAndBeginRender(sizeX, sizeY, offsetX, offsetY, offsetZ) {
         document.getElementById( 'container' ).appendChild( warning );
     }
 
-    document.getElementById("right-side").appendChild(renderer.domElement);
+    domElement.appendChild(renderer.domElement);
 }

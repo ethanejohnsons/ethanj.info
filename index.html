@@ -1,92 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="index.css">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-        <meta name="Ethan's Info" content="Ethan Johnson's social links" />
+        <meta name="Ethan's Portfolio" content="Ethan Johnson's Portfolio" />
         <title>Ethan Johnson</title>
         <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+        <link rel="stylesheet" href="index.css">
     </head>
     <body>
         <script type="module" src="index.js"></script>
         <div id="about">
-            <div style="width: 35%; position: absolute; margin-left: 20%; margin-top: 25px; display: block;">
-                <div style="display: flex; font-size: 4rem; height: 140px;">
+            <div style="justify-content: center; text-align: center; margin-left: 10%; width: 80%;">
+                <img style="border-radius: 50%;" width="256px" height="256x" src="profile.jpeg"/>
+                <div id="about-intro">
                     <p id="introduction"></p>
                     <p class="cursor">_</p>
                 </div>
                 <p>I'm a software engineer with experience in frontend, backend, and game development.</p>
-                <div style="text-align: center; margin-top: 100px; margin-right: 10%">
-                    <h2>Work Experience</h2>
-                    <p style="margin: 0; color: #888888;">MrBeast Gaming</p>
-                    <p style="margin: 0;">Minecraft Developer</p>
-                    <br>
-                    <p style="margin: 0; color: #888888;">Marvin Windows</p>
-                    <p style="margin: 0;">Systems Programmer</p>
-                    <br>
-                    <p style="margin: 0; color: #888888;">Total Expert</p>
-                    <p style="margin: 0;">Software Intern</p>
-                    <br>
-                </div>
-            </div>
-            <div style="position: absolute; margin-left: 56%; border-left:2px solid #000; height:275px"></div>
-            <div style="margin-left: 60%;">
-                <img style="border-radius: 50%;" width="256px" height="256x" src="profile.jpeg"/>
-                <div style="text-align: center; margin-top: 100px; margin-right: 65%">
-                    <h2>Contact</h2>
-                    <p>ethan@ejohnsons.com</p>
-                    <div style="display: flex; justify-content: center">
-                        <a href="https://www.linkedin.com/in/ethan-michael-johnson/"><img width="100px" height="100px" src="icons/linkedin.svg"></a>
-                        <a href="https://github.com/ethanejohnsons"><img width="100px" height="100px" src="icons/github.svg"></a>
+                <div>
+                    <div id="about-experience">
+                        <h2>Work Experience</h2>
+                        <p style="margin: 0; color: #888888;">MrBeast Gaming</p>
+                        <p style="margin: 0;">Minecraft Developer</p>
+                        <br>
+                        <p style="margin: 0; color: #888888;">Marvin Windows</p>
+                        <p style="margin: 0;">Systems Programmer</p>
+                        <br>
+                        <p style="margin: 0; color: #888888;">Total Expert</p>
+                        <p style="margin: 0;">Software Intern</p>
+                        <br>
+                    </div>
+                    <div id="about-tech">
+                        <h2>Languages & Tech</h2>
+                        <p style="color: #888888;">Java, Javascript, Node.js, React, C# (ASP.NET), Python, MS SQL Server, PostgreSQL, MongoDB, Git, NGINX, Linux.</p>
+                    </div>
+                    <div id="about-contact">
+                        <h2>Contact</h2>
+                        <p style="color: #888888">ethan@ejohnsons.com</p>
+                        <div style="display: flex; justify-content: center">
+                            <a href="https://www.linkedin.com/in/ethan-michael-johnson/"><img width="75" height="75px" src="icons/linkedin.svg"></a>
+                            <a href="https://github.com/ethanejohnsons"><img width="75px" height="75px" src="icons/github.svg"></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div style="display: flex; font-size: 1.2rem;">
             <div id="lazurite">
-                <div id="right-side"></div>
-            </div>
-            <div style="position: absolute; z-index: 1; margin-left: 2rem; margin-top: 300px; background-color: #00000044; color: #FFFFFF; border-radius: 10px">
-                <div style="margin: 2rem">
-                    <h1>Lazurite</h1>
-                    <p style="font-size: 2rem">Developing Minecraft mods since 2020.</p>
-                    <div style="display: flex; justify-content: space-between; width: 725px">
-                        <a href="https://github.com/LazuriteMC/Rayon"><img class="project" src="icons/rayon.png"/></a>
-                        <div>
-                            <h2>Rayon</h2>
-                            <p style="width: 600px">
-                                A native bullet physics implementation in Minecraft.
-                                Allows for the creation of rigid body based entities.
-                            </p>
+                <div id="lazurite-info">
+                    <div style="margin: 2rem; white-space: normal">
+                        <h1 style="font-size: min(15vw, 5rem);">Lazurite</h1>
+                        <p style="font-size: min(6vw, 2rem)">Developing Minecraft mods since 2020.</p>
+                        <div class="mod">
+                            <div class="mod-title">
+                                <a href="https://github.com/LazuriteMC/Rayon">
+                                    <img class="mod-icon" src="icons/rayon.png"/>
+                                </a>
+                                <h2>Rayon</h2>
+                            </div>
+                            <div class="mod-description">
+                                <p>
+                                    A native bullet physics implementation in Minecraft.
+                                    Allows for the creation of rigid body based entities.
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <br><hr><br>
-                    <div style="display: flex; justify-content: space-between; width: 725px">
-                        <a href="https://github.com/LazuriteMC/Quadz"><img class="project" src="icons/quadz.png"/></a>
-                        <div>
-                            <h2>Quadz</h2>
-                            <p style="width: 600px">
-                                Adds flyable FPV quadcopters to Minecraft and simulates realistic flight using Rayon. Supports most if not all USB controllers as input.
-                            </p>
-                            <iframe width="550" height="275" style="border: 4px solid #FFFFFF" src="https://www.youtube.com/embed/Xx5U0qX1OT4" title="Quadz ▷ Exploring" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <br><hr><br>
+                        <div class="mod">
+                            <div class="mod-title">
+                                <a href="https://github.com/LazuriteMC/Quadz">
+                                    <img class="mod-icon" src="icons/quadz.png"/>
+                                </a>
+                                <h2>Quadz</h2>
+                            </div>
+                            <div class="mod-description">
+                                <p>
+                                    Adds flyable FPV quadcopters to Minecraft and simulates realistic flight using Rayon. Supports most if not all USB controllers as input.
+                                </p>
+                                <iframe src="https://www.youtube.com/embed/Xx5U0qX1OT4" title="Quadz ▷ Exploring" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
                         </div>
-                    </div>
-                    <br><hr><br>
-                    <div style="display: flex; justify-content: space-between; width: 725px">
-                        <a href="https://github.com/LazuriteMC/Polaroid"><img class="project" style="width: 100px; height: 90px" src="icons/polaroid.png"/></a>
-                        <div>
-                            <h2>Polariod</h2>
-                            <p style="width: 600px">
-                                Adds a polaroid camera to Minecraft that is capable of capturing and "printing" photos.
-                                Photos can be hung on walls using Item Frames.
-                            </p>
-                            <img width="550px" style="border: 4px solid #FFFFFF;" src="https://github.com/LazuriteMC/Polaroid/raw/main/src/main/resources/assets/polaroid/images/examples.png?raw=true"/>
+                        <br><hr><br>
+                        <div class="mod">
+                            <div class="mod-title">
+                                <a href="https://github.com/LazuriteMC/Polaroid"><img class="mod-icon" style="width: 100px; height: 90px" src="icons/polaroid.png"/></a>
+                                <h2>Polaroid</h2>
+                            </div>
+                            <div class="mod-description">
+                                <p>
+                                    Adds a polaroid camera to Minecraft that is capable of capturing and "printing" photos.
+                                    Photos can be hung on walls using Item Frames.
+                                </p>
+                                <img width="94%" style="border: 4px solid #FFFFFF;" src="https://github.com/LazuriteMC/Polaroid/raw/main/src/main/resources/assets/polaroid/images/examples.png?raw=true"/>
+                            </div>
                         </div>
+                        <br><br>
                     </div>
-                    <br><br>
                 </div>
+                <div id="voyager"></div>
             </div>
         </div>
     </body>
